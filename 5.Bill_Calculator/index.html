@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <title>Bill Calculator</title>
+</head>
+
+<body>
+    <h1 align="center">Restaurant Bill Calculator</h1>
+    <br>
+    <label for="name">Name</label>
+    <input type="text" name="name" id="name" placeholder="Enter your Name" required>
+    <br><br>
+
+    <label for="items">Items</label>
+    <input list="itms" id="items" name="items" placeholder="Select Item name" required>
+    <datalist id="itms">
+        <option value="Chicken Biryani">
+        <option value="Mutton Biryani">
+        <option value="Parotta">
+        <option value="Idli">
+        <option value="Poori">
+        <option value="Pongal">
+    </datalist>
+    <input type="number" placeholder="quantity" min="1" max="5000" id="quantity" name="quantity" required>
+    <button id="add-itm">Add Item</button>
+    <br><br>
+
+    <div class="bill">
+
+        <h4>Bill Summary </h4>
+        <div id="bill-content">
+            <table class="det">
+                <tr>
+                    <th><label for="person">Name </label></th>
+                    <td>:</td>
+                    <td><span id="nme"></span></td>
+                </tr>
+                <tr>
+                    <th><label for="date">Date </label></th>
+                    <td>:</td>
+                    <td><span id="dte"></span></td>
+                </tr>
+                <tr>
+                    <th><label for="time">Time </label></th>
+                    <td>:</td>
+                    <td><span id="tme"></span></td>
+                </tr>
+            </table>
+
+            <br>
+            <table id="summary" class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>S.No</th>
+                        <th>Item Name</th>
+                        <th>Quantity</th>
+                        <th>Price</th>
+                        <th>Amount</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+                <tr>
+                    <th colspan="4" style="text-align: right;padding-right:20px;">Total Amount </th>
+                    <td id="tot" style="text-align: right;">00.00</td>
+                </tr>
+            </table>
+        </div>
+        <button onclick="printC()" class="billbtn">Print Bill</button>
+    </div>
+</body>
+<style>
+    body {
+        margin: 20px;
+        padding: 15px;
+    }
+
+    label {
+        font-weight: bold;
+    }
+
+    .bill {
+        display: none;
+    }
+
+    #add-itm {
+        font-weight: 650;
+        color: #f6f6f6;
+        padding: 2.5px 10px;
+        border: none;
+        border-radius: 5px;
+        background-color: #6f6f6f;
+    }
+
+    #add-itm:hover {
+        background-color: #f00;
+        transition: all 0.3s linear;
+    }
+
+    #add-itm:active {
+        transition: all 0.1s linear;
+        background-color: #aa0;
+        color: #fff;
+    }
+
+    .det {
+        font-size: 20px;
+    }
+
+    #summary {
+        background-color: #fff;
+        color: #000;
+        font-family: arial;
+        text-transform: capitalize;
+        font-size: 2.5vh;
+    }
+
+    #summary tr {
+        text-align: center;
+    }
+
+    #bill-content {
+        border: 1px dashed #000;
+        border-radius: 2px;
+        padding: 5px;
+        margin-bottom: 20px;
+    }
+
+    button.billbtn {
+        position: absolute;
+        right: 40px;
+        font-weight: 450;
+        font-variant: small-caps;
+        -webkit-text-stroke: 0.5px #ff0;
+        border: none;
+        border-radius: 3px;
+        color: #fff;
+        background-color: #0f0;
+    }
+
+    button.page:hover {
+        background-color: rgb(0, 198, 0);
+    }
+</style>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+<script>
+    const items = {
+        "Chicken Biryani": "70.00",
+        "Mutton Biryani": "100.00",
+        "Parotta": "20.00",
+        "Idli": "25.00",
+        "Poori": "30.00",
+        "Pongal": "50.00"
+    }
+    var total = amount = count = 0;
+    var DateTime = new Date();
+
+    document.getElementById("add-itm").addEventListener("click", () => {
+
+        //content display
+        var name = document.getElementById("name");
+        if (!name.value) {
+            alert("Please! Enter Your name.");
+        }
+        else {
+            var itemName = document.getElementById("items").value;
+            //check item present or not
+            if (itemName == "") {
+                alert("Please!  Select an Item from the list.");
+            }
+            else if (!(itemName in items)) {
+                alert("Item is not present.")
+            }
+            //if item is present
+            else {
+                document.querySelector(".bill").style.display = "block";
+                name.readOnly = true;
+                name.style.cursor = "pointer";
+                //bill top
+                var person = document.getElementById("nme");
+                var date = document.getElementById("dte");
+                var time = document.getElementById("tme");
+                date.innerHTML = DateTime.toLocaleDateString('en-GB');
+                time.innerHTML = DateTime.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', hour12: true });
+                person.innerHTML = name.value;
+                //table contents
+                var quantity = document.getElementById("quantity").value;
+                var tb = document.querySelector("#summary tbody");
+                var price = items[itemName];
+
+                try {
+                    if (itemName && quantity && price) {
+                        var amount = quantity * price;
+                        total += amount;
+                        count += 1;
+                        var newRow = `
+                    <tr>
+                        <td style="text-align: center;">${count}</td>
+                        <td style="text-align: left;">${itemName}</td>
+                        <td style="text-align: right;">${quantity}</td>
+                        <td style="text-align: right;">${price}</td>
+                        <td style="text-align: right;">${amount}.00</td>
+                    </tr>
+                    `;
+                        tb.innerHTML += newRow;
+                        tot.innerHTML = total + ".00"
+                        document.getElementById("items").value = "";
+                        document.getElementById("quantity").value = "";
+                    }
+                } catch (e) {
+                    alert("Error: " + e);
+                }
+            }
+        }
+    });
+
+    //print content
+    function printC() {
+        var main = document.body.innerHTML;
+        var printContent = document.getElementById("bill-content").innerHTML;
+        document.body.innerHTML = "<br><br><br>" + printContent;
+        window.print()
+        document.body.innerHTML = main;
+    }
+</script>
+</html>
