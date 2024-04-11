@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Student Registration Form</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        background-color: #82caff;
+    }
+
+    form {
+        width: 400px;
+        padding: 20px;
+        background-color: #fff;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    form h2 {
+        margin-bottom: 20px;
+        text-align: center;
+        color: #333;
+    }
+
+    label {
+        display: block;
+        margin-bottom: 10px;
+        color: #333;
+    }
+
+    input[type="text"],
+    input[type="email"],
+    input[type="date"],
+    input[type="tel"],
+    textarea,
+    select {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 15px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+    }
+
+    .error {
+        color: red;
+        font-size: 12px;
+    }
+
+    button {
+        width: 100%;
+        padding: 10px;
+        background-color: #4caf50;
+        border: none;
+        border-radius: 4px;
+        color: #fff;
+        cursor: pointer;
+        transition: background-color 0.3s;
+    }
+
+    button:hover {
+        background-color: #45a049;
+    }
+</style>
+</head>
+<body>
+
+<form id="registrationForm" onsubmit="return validateForm()">
+    <h2>Student Registration Form</h2>
+    <div>
+        <label for="firstName">First Name:</label>
+        <input type="text" id="firstName" name="firstName" >
+        <span id="firstNameError" class="error"></span>
+    </div>
+    <div>
+        <label for="lastName">Last Name:</label>
+        <input type="text" id="lastName" name="lastName" >
+        <span id="lastNameError" class="error"></span>
+    </div>
+    <div>
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" >
+        <span id="emailError" class="error"></span>
+    </div>
+    <div>
+        <label for="studentCode">Student Code:</label>
+        <input type="text" id="studentCode" name="studentCode" >
+        <span id="studentCodeError" class="error"></span>
+    </div>
+    <div>
+        <label for="dob">Date of Birth:</label>
+        <input type="date" id="dob" name="dob" >
+        <span id="dobError" class="error"></span>
+    </div>
+    <div>
+        <label for="gender">Gender:</label>
+        <select id="gender" name="gender" >
+            <option value="">Select Gender</option>
+            <option value="male">Male</option>
+            <option value="female">Female</option>
+            <option value="other">Other</option>
+        </select>
+        <span id="genderError" class="error"></span>
+    </div>
+    <div>
+        <label for="address">Address:</label>
+        <textarea id="address" name="address" ></textarea>
+        <span id="addressError" class="error"></span>
+    </div>
+    <div>
+        <label for="phone">Phone Number:</label>
+        <input type="tel" id="phone" name="phone" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" >
+        <span id="phoneError" class="error"></span>
+    </div>
+    <div>
+        <label for="program">Program of Study:</label>
+        <input type="text" id="program" name="program" >
+        <span id="programError" class="error"></span>
+    </div>
+    <div>
+        <label for="year">Year of Study:</label>
+        <input type="number" id="year" name="year" min="1" max="5" >
+        <span id="yearError" class="error"></span>
+    </div>
+    <button type="submit">Register</button>
+</form>
+
+<script>
+function validateForm() {
+    var firstName = document.getElementById("firstName").value;
+    var lastName = document.getElementById("lastName").value;
+    var email = document.getElementById("email").value;
+    var studentCode = document.getElementById("studentCode").value;
+    var dob = document.getElementById("dob").value;
+    var gender = document.getElementById("gender").value;
+    var address = document.getElementById("address").value;
+    var phone = document.getElementById("phone").value;
+    var program = document.getElementById("program").value;
+    var year = document.getElementById("year").value;
+
+    var firstNameError = document.getElementById("firstNameError");
+    var lastNameError = document.getElementById("lastNameError");
+    var emailError = document.getElementById("emailError");
+    var studentCodeError = document.getElementById("studentCodeError");
+    var dobError = document.getElementById("dobError");
+    var genderError = document.getElementById("genderError");
+    var addressError = document.getElementById("addressError");
+    var phoneError = document.getElementById("phoneError");
+    var programError = document.getElementById("programError");
+    var yearError = document.getElementById("yearError");
+
+    var isValid = true;
+
+    // Validate first name
+    if (!firstName) {
+        firstNameError.textContent = "First name is required";
+        isValid = false;
+    } else {
+        firstNameError.textContent = "";
+    }
+
+    // Validate last name
+    if (!lastName) {
+        lastNameError.textContent = "Last name is required";
+        isValid = false;
+    } else {
+        lastNameError.textContent = "";
+    }
+
+    // Validate email
+    if (!email) {
+        emailError.textContent = "Email is required";
+        isValid = false;
+    } else if (!/\S+@\S+\.\S+/.test(email)) {
+        emailError.textContent = "Invalid email address";
+        isValid = false;
+    } else {
+        emailError.textContent = "";
+    }
+
+    // Validate student code
+    if (!studentCode) {
+        studentCodeError.textContent = "Student code is required";
+        isValid = false;
+    } else {
+        studentCodeError.textContent = "";
+    }
+
+    // Validate date of birth
+    if (!dob) {
+        dobError.textContent = "Date of Birth is required";
+        isValid = false;
+    } else {
+        dobError.textContent = "";
+    }
+
+    // Validate gender
+    if (!gender) {
+        genderError.textContent = "Gender is required";
+        isValid = false;
+    } else {
+        genderError.textContent = "";
+    }
+
+    // Validate address
+    if (!address) {
+        addressError.textContent = "Address is required";
+        isValid = false;
+    } else {
+        addressError.textContent = "";
+    }
+
+    // Validate phone number
+    if (!phone) {
+        phoneError.textContent = "Phone number is required";
+        isValid = false;
+    } else if (!/^\d{10}$/.test(phone)) {
+        phoneError.textContent = "Invalid phone number";
+        isValid = false;
+    } else {
+        phoneError.textContent = "";
+    }
+
+    // Validate program of study
+    if (!program) {
+        programError.textContent = "Program of study is required";
+        isValid = false;
+    } else {
+        programError.textContent = "";
+    }
+
+    // Validate year of study
+    if (!year) {
+        yearError.textContent = "Year of study is required";
+        isValid = false;
+    } else if (isNaN(year) || year < 1 || year > 5) {
+        yearError.textContent = "Invalid year of study";
+        isValid = false;
+    } else {
+        yearError.textContent = "";
+    }
+
+
+    if (isValid) {
+        openNewPage();
+    }
+
+    return false; 
+}
+
+function openNewPage() {
+    var firstName = document.getElementById("firstName").value;
+    var lastName = document.getElementById("lastName").value;
+    var email = document.getElementById("email").value;
+    var studentCode = document.getElementById("studentCode").value;
+    var dob = document.getElementById("dob").value;
+    var gender = document.getElementById("gender").value;
+    var address = document.getElementById("address").value;
+    var phone = document.getElementById("phone").value;
+    var program = document.getElementById("program").value;
+    var year = document.getElementById("year").value;
+
+    var userData = {
+        firstName: firstName,
+        lastName: lastName,
+        email: email,
+        studentCode: studentCode,
+        dob: dob,
+        gender: gender,
+        address: address,
+        phone: phone,
+        program: program,
+        year: year
+    };
+
+    sessionStorage.setItem('userData', JSON.stringify(userData));
+
+    window.open('details.html', '_blank');
+}
+</script>
+
+</body>
+</html>
