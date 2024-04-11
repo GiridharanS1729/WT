@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Registration Details</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 20px;
+        background-color: #f4f4f4;
+    }
+
+    .container {
+        max-width: 600px;
+        margin: 0 auto;
+        background-color: #fff;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    h2 {
+        text-align: center;
+        color: #333;
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+    }
+
+    th, td {
+        padding: 10px;
+        border-bottom: 1px solid #ddd;
+    }
+
+    th {
+        background-color: #f2f2f2;
+    }
+</style>
+</head>
+<body>
+
+<div class="container">
+    <h2>Registration Details</h2>
+    <table>
+        <tr>
+            <th>Field</th>
+            <th>Value</th>
+        </tr>
+        <tr>
+            <td>First Name</td>
+            <td id="firstName"></td>
+        </tr>
+        <tr>
+            <td>Last Name</td>
+            <td id="lastName"></td>
+        </tr>
+        <tr>
+            <td>Email</td>
+            <td id="email"></td>
+        </tr>
+        <tr>
+            <td>Student Code</td>
+            <td id="studentCode"></td>
+        </tr>
+        <tr>
+            <td>Date of Birth</td>
+            <td id="dob"></td>
+        </tr>
+        <tr>
+            <td>Gender</td>
+            <td id="gender"></td>
+        </tr>
+        <tr>
+            <td>Address</td>
+            <td id="address"></td>
+        </tr>
+        <tr>
+            <td>Phone Number</td>
+            <td id="phone"></td>
+        </tr>
+        <tr>
+            <td>Program of Study</td>
+            <td id="program"></td>
+        </tr>
+        <tr>
+            <td>Year of Study</td>
+            <td id="year"></td>
+        </tr>
+    </table>
+</div>
+
+<script>
+var userData = JSON.parse(sessionStorage.getItem('userData'));
+
+document.getElementById('firstName').textContent = userData.firstName;
+document.getElementById('lastName').textContent = userData.lastName;
+document.getElementById('email').textContent = userData.email;
+document.getElementById('studentCode').textContent = userData.studentCode;
+document.getElementById('dob').textContent = userData.dob;
+document.getElementById('gender').textContent = userData.gender;
+document.getElementById('address').textContent = userData.address;
+document.getElementById('phone').textContent = userData.phone;
+document.getElementById('program').textContent = userData.program;
+document.getElementById('year').textContent = userData.year;
+</script>
+
+</body>
+</html>
