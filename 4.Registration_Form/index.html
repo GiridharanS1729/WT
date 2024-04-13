@@ -1,290 +1,268 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Student Registration Form</title>
-<style>
-    body {
-        font-family: Arial, sans-serif;
-        margin: 0;
-        padding: 0;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        height: 100vh;
-        background-color: #82caff;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration Form</title>
+    <style>
+        body {
+            background-color: #f0f0f0;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            cursor: pointer;
+        }
 
-    form {
-        width: 400px;
-        padding: 20px;
-        background-color: #fff;
-        border-radius: 8px;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    }
+        .container {
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            width: 90%;
+            display: flex;
+            justify-content: space-between;
+            margin: 0 auto;
+        }
 
-    form h2 {
-        margin-bottom: 20px;
-        text-align: center;
-        color: #333;
-    }
 
-    label {
-        display: block;
-        margin-bottom: 10px;
-        color: #333;
-    }
+        .form-container {
+            width: 50%;
+            padding: 40px;
+            background-color: #f5f5f5;
+        }
 
-    input[type="text"],
-    input[type="email"],
-    input[type="date"],
-    input[type="tel"],
-    textarea,
-    select {
-        width: 100%;
-        padding: 10px;
-        margin-bottom: 15px;
-        border: 1px solid #ccc;
-        border-radius: 4px;
-    }
+        .output-container {
+            width: 50%;
+            padding: 40px;
+            background-color: #fafafa;
+        }
 
-    .error {
-        color: red;
-        font-size: 12px;
-    }
+        h2,
+        h3 {
+            color: #333;
+        }
 
-    button {
-        width: 100%;
-        padding: 10px;
-        background-color: #4caf50;
-        border: none;
-        border-radius: 4px;
-        color: #fff;
-        cursor: pointer;
-        transition: background-color 0.3s;
-    }
+        .form-group {
+            margin-bottom: 20px;
+        }
 
-    button:hover {
-        background-color: #45a049;
-    }
-</style>
+        .form-row {
+            display: flex;
+            flex-direction: row;
+        }
+        .form-row input{
+            position: relative;
+            margin-top: -5px;
+            width:15px;
+        }
+
+        label {
+            font-weight: bold;
+            display: block;
+            margin-bottom: 5px;
+            color: #5e0000;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="tel"],
+        input[type="number"],
+        select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+            margin-top: 5px;
+        }
+
+        input[type="radio"] {
+            margin-right: 5px;
+        }
+
+        button {
+            background-color: #42c605;
+            color: #fff;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        button:hover {
+            background-color: #1f7900;
+        }
+
+        table {
+            width: 100%;
+            margin-top: 20px;
+            border-collapse: collapse;
+        }
+
+        th,
+        td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        @media(max-width: 768px) {
+            .container {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .form-container,
+            .output-container {
+                width: 100%;
+            }
+        }
+    </style>
 </head>
+
 <body>
 
-<form id="registrationForm" onsubmit="return validateForm()">
-    <h2>Student Registration Form</h2>
-    <div>
-        <label for="firstName">First Name:</label>
-        <input type="text" id="firstName" name="firstName" >
-        <span id="firstNameError" class="error"></span>
+    <div class="container">
+        <div class="form-container">
+            <h2 class="tit">Registration Form</h2>
+            <form id="myForm" onsubmit="return validateForm()">
+                <div class="form-group">
+                    <label for="name">Name:</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="rollno">Roll Number:</label>
+                    <input type="text" id="rollno" name="rollno" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="number">Phone Number:</label>
+                    <input type="tel" id="number" name="number" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="age">Age:</label>
+                    <input type="number" id="age" name="age" min="1" max="100" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="gender">Gender:</label>
+                    <div class="form-row">
+                        <input type="radio" id="male" name="gender" value="male" required>
+                        <label for="male">Male</label>
+                        <input type="radio" id="female" name="gender" value="female">
+                        <label for="female">Female</label>
+                        <input type="radio" id="other" name="gender" value="other">
+                        <label for="other">Other</label>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="year">Year of Study:</label>
+                    <select id="year" name="year" required>
+                        <option value="0">Select Year</option>
+                        <option value="1">First Year</option>
+                        <option value="2">Second Year</option>
+                        <option value="3">Third Year</option>
+                        <option value="4">Fourth Year</option>
+                    </select>
+                </div>
+
+                <button type="submit">Submit</button>
+            </form>
+        </div>
+
+        <div class="output-container">
+            <h3>Form Values:</h3>
+            <div id="output">
+                <table>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </div>
     </div>
-    <div>
-        <label for="lastName">Last Name:</label>
-        <input type="text" id="lastName" name="lastName" >
-        <span id="lastNameError" class="error"></span>
-    </div>
-    <div>
-        <label for="email">Email:</label>
-        <input type="email" id="email" name="email" >
-        <span id="emailError" class="error"></span>
-    </div>
-    <div>
-        <label for="studentCode">Student Code:</label>
-        <input type="text" id="studentCode" name="studentCode" >
-        <span id="studentCodeError" class="error"></span>
-    </div>
-    <div>
-        <label for="dob">Date of Birth:</label>
-        <input type="date" id="dob" name="dob" >
-        <span id="dobError" class="error"></span>
-    </div>
-    <div>
-        <label for="gender">Gender:</label>
-        <select id="gender" name="gender" >
-            <option value="">Select Gender</option>
-            <option value="male">Male</option>
-            <option value="female">Female</option>
-            <option value="other">Other</option>
-        </select>
-        <span id="genderError" class="error"></span>
-    </div>
-    <div>
-        <label for="address">Address:</label>
-        <textarea id="address" name="address" ></textarea>
-        <span id="addressError" class="error"></span>
-    </div>
-    <div>
-        <label for="phone">Phone Number:</label>
-        <input type="tel" id="phone" name="phone" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" >
-        <span id="phoneError" class="error"></span>
-    </div>
-    <div>
-        <label for="program">Program of Study:</label>
-        <input type="text" id="program" name="program" >
-        <span id="programError" class="error"></span>
-    </div>
-    <div>
-        <label for="year">Year of Study:</label>
-        <input type="number" id="year" name="year" min="1" max="5" >
-        <span id="yearError" class="error"></span>
-    </div>
-    <button type="submit">Register</button>
-</form>
 
-<script>
-function validateForm() {
-    var firstName = document.getElementById("firstName").value;
-    var lastName = document.getElementById("lastName").value;
-    var email = document.getElementById("email").value;
-    var studentCode = document.getElementById("studentCode").value;
-    var dob = document.getElementById("dob").value;
-    var gender = document.getElementById("gender").value;
-    var address = document.getElementById("address").value;
-    var phone = document.getElementById("phone").value;
-    var program = document.getElementById("program").value;
-    var year = document.getElementById("year").value;
+    <script>
+        function validateForm() {
+            var name = document.getElementById("name").value;
+            var rollno = document.getElementById("rollno").value;
+            var email = document.getElementById("email").value;
+            var number = document.getElementById("number").value;
+            var age = document.getElementById("age").value;
+            var gender = document.querySelector('input[name="gender"]:checked');
+            var year = document.getElementById("year").value;
 
-    var firstNameError = document.getElementById("firstNameError");
-    var lastNameError = document.getElementById("lastNameError");
-    var emailError = document.getElementById("emailError");
-    var studentCodeError = document.getElementById("studentCodeError");
-    var dobError = document.getElementById("dobError");
-    var genderError = document.getElementById("genderError");
-    var addressError = document.getElementById("addressError");
-    var phoneError = document.getElementById("phoneError");
-    var programError = document.getElementById("programError");
-    var yearError = document.getElementById("yearError");
+            if (name === "" || rollno === "" || email === "" || number === "" || age === "" || !gender || year == 0) {
+                alert("Please fill out all fields");
+                return false;
+            }
 
-    var isValid = true;
+            if (!validateEmail(email)) {
+                alert("Invalid email address");
+                return false;
+            }
 
-    // Validate first name
-    if (!firstName) {
-        firstNameError.textContent = "First name is required";
-        isValid = false;
-    } else {
-        firstNameError.textContent = "";
-    }
+            if (number.length !== 10 || isNaN(number)) {
+                alert("Phone Number must be a 10-digit number");
+                return false;
+            }
 
-    // Validate last name
-    if (!lastName) {
-        lastNameError.textContent = "Last name is required";
-        isValid = false;
-    } else {
-        lastNameError.textContent = "";
-    }
+            var output = document.querySelector("#output table tbody");
+            var table =
+                `<tr><th>Field</th><th>Value</th></tr>
+            <tr><td>Name</td><td>${name}</td></tr>
+            <tr><td>Roll Number</td><td>${rollno}</td></tr>
+            <tr><td>Email</td><td>${email}</td></tr>
+            <tr><td>Phone Number</td><td>${number}</td></tr>
+            <tr><td>Age</td><td>${age}</td></tr>
+            <tr><td>Gender</td><td>${gender.value}</td></tr>
+            <tr><td>Year of Study</td><td>${year}</td></tr><br/><br/>`;
 
-    // Validate email
-    if (!email) {
-        emailError.textContent = "Email is required";
-        isValid = false;
-    } else if (!/\S+@\S+\.\S+/.test(email)) {
-        emailError.textContent = "Invalid email address";
-        isValid = false;
-    } else {
-        emailError.textContent = "";
-    }
+            output.innerHTML += table;
 
-    // Validate student code
-    if (!studentCode) {
-        studentCodeError.textContent = "Student code is required";
-        isValid = false;
-    } else {
-        studentCodeError.textContent = "";
-    }
+            document.getElementById("myForm").reset();
 
-    // Validate date of birth
-    if (!dob) {
-        dobError.textContent = "Date of Birth is required";
-        isValid = false;
-    } else {
-        dobError.textContent = "";
-    }
+            return false;
+        }
 
-    // Validate gender
-    if (!gender) {
-        genderError.textContent = "Gender is required";
-        isValid = false;
-    } else {
-        genderError.textContent = "";
-    }
+        function validateEmail(email) {
+            var at = email.indexOf("@");
+            var dot = email.lastIndexOf(".");
+            return at > 0 && dot > at + 1 && dot < email.length - 1;
+        }
 
-    // Validate address
-    if (!address) {
-        addressError.textContent = "Address is required";
-        isValid = false;
-    } else {
-        addressError.textContent = "";
-    }
+        var formInputs = document.querySelectorAll('#myForm input:not([type="radio"]), #myForm select');
+        var submitBtn = document.getElementById('submitBtn');
 
-    // Validate phone number
-    if (!phone) {
-        phoneError.textContent = "Phone number is required";
-        isValid = false;
-    } else if (!/^\d{10}$/.test(phone)) {
-        phoneError.textContent = "Invalid phone number";
-        isValid = false;
-    } else {
-        phoneError.textContent = "";
-    }
+        formInputs.forEach((input, index) => {
+            input.addEventListener('focus', function () {
+                var prevInput = formInputs[index - 1];
+                if (prevInput && prevInput.value.trim() === '') {
+                    var fieldName = prevInput.getAttribute('name');
+                    alert("Please fill out the " + fieldName + " field first");
+                    prevInput.focus();
+                }
+            });
+        });
 
-    // Validate program of study
-    if (!program) {
-        programError.textContent = "Program of study is required";
-        isValid = false;
-    } else {
-        programError.textContent = "";
-    }
-
-    // Validate year of study
-    if (!year) {
-        yearError.textContent = "Year of study is required";
-        isValid = false;
-    } else if (isNaN(year) || year < 1 || year > 5) {
-        yearError.textContent = "Invalid year of study";
-        isValid = false;
-    } else {
-        yearError.textContent = "";
-    }
-
-
-    if (isValid) {
-        openNewPage();
-    }
-
-    return false; 
-}
-
-function openNewPage() {
-    var firstName = document.getElementById("firstName").value;
-    var lastName = document.getElementById("lastName").value;
-    var email = document.getElementById("email").value;
-    var studentCode = document.getElementById("studentCode").value;
-    var dob = document.getElementById("dob").value;
-    var gender = document.getElementById("gender").value;
-    var address = document.getElementById("address").value;
-    var phone = document.getElementById("phone").value;
-    var program = document.getElementById("program").value;
-    var year = document.getElementById("year").value;
-
-    var userData = {
-        firstName: firstName,
-        lastName: lastName,
-        email: email,
-        studentCode: studentCode,
-        dob: dob,
-        gender: gender,
-        address: address,
-        phone: phone,
-        program: program,
-        year: year
-    };
-
-    sessionStorage.setItem('userData', JSON.stringify(userData));
-
-    window.open('details.html', '_blank');
-}
-</script>
+    </script>
 
 </body>
+
 </html>
