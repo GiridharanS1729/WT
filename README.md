@@ -6,5 +6,5 @@
 <a href="https://22itr025-weblab.netlify.app/3.responsive_website_bootstrap/">3. Responsive_Website_Bootstrap</a><br>
 <a href="https://22itr025-weblab.netlify.app/4.registration_form/">4. Registration_Form</a><br>
 <a href="https://22itr025-weblab.netlify.app/5.bill_calculator/">5. Bill_Calculator</a><br>
-<a href="https://22itr025-weblab.netlify.app/6.Compound_Intersetr/">6.Compound_Interset</a><br>
+<a href="https://22itr025-weblab.netlify.app/6.compound_intersetr/">6.Compound_Interset</a><br>
  
