@@ -1,0 +1,35 @@
+<div class="container" id="add">
+    <form id="addForm" action="http://localhost:4201/add" method="POST">
+        <div class="one">
+            <label for="id">ID</label>
+            <input type="number" id="idc" name="idc" placeholder="Enter ID" max="500" required>
+        </div>
+        <br><br>
+        <div class="one">
+            <label for="name">Name</label>
+            <input type="text" id="username" name="username" placeholder="Enter Name" required>
+        </div>
+        <br><br>
+        <div class="one">
+            <label for="contact">Contact Number</label>
+            <input type="tel" id="phone" name="phone" pattern="\d{10}" required placeholder="1234567890">
+        </div>
+        <br><br>
+        <div class="one">
+            <label for="aadhar">Aadhar Number</label>
+            <input type="text" id="aadhar" name="aadhar" minlength="14" maxlength="14" pattern="\d{4} \d{4} \d{4}" placeholder="XXXX XXXX XXXX" required>
+        </div>
+        <br><br>
+        <div class="one">
+            <label for="intime">In-Time</label>
+            <input type="datetime-local" id="intime" name="intime" required>
+        </div>
+        <br><br>
+        <div class="one">
+            <label for="outtime">Out-Time</label>
+            <input type="datetime-local" id="outtime" name="outtime" required>
+        </div>
+        <br><br><br><br>
+        <button type="submit">Add</button>
+    </form>
+</div>
