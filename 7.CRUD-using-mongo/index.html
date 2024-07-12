@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Visitor Management system</title>
+</head>
+
+<body>
+    <header>Hotel Visitor Management system</header>
+    <div class="left">
+        <nav>
+            <div class="in">
+                <div class="add bx" onclick="toggleForm(0)">Add Visitor</div>
+                <div class="view bx" id="view" onclick="toggleForm(1)">View Visitor</div>
+                <div class="update bx" onclick="toggleForm(2)">Update Visitor</div>
+                <div class="delete bx" onclick="toggleForm(3)">Delete Visitor</div>
+            </div>
+        </nav>
+    </div>
+    <div class="right">
+        <!-- Add visitor -->
+        <div class="container" id="add" style="display:none;">
+            <form id="addForm" action="http://localhost:9000/addVisitor" method="POST">
+                <label for="id">ID</label>
+                <input type="number" id="idc" name="idc" placeholder="Enter ID" required>
+                <br><br>
+                <label for="name">Name</label>
+                <input type="text" id="username" name="username" placeholder="Enter Name" required>
+                <br><br>
+                <label for="contact">Contact Number</label>
+                <input type="text" id="phone" name="phone" pattern="\d{10}" maxlength="15" required
+                    placeholder="1234567890">
+                <br><br>
+                <label for="aadhar">Aadhar Number</label>
+                <input type="text" id="aadhar" name="aadhar" minlength="14" maxlength="14" pattern="\d{4} \d{4} \d{4}"
+                    placeholder="XXXX XXXX XXXX" required>
+                <br><br>
+                <label for="intime">In-Time</label>
+                <input type="datetime-local" id="intime" name="intime" required>
+                <br><br>
+                <label for="outtime">Out-Time</label>
+                <input type="datetime-local" id="outtime" name="outtime" required>
+                <br><br>
+                <button type="submit">Add</button>
+            </form>
+        </div>
+        <!-- View visitors -->
+        <div class="container" id="view" style="display:block;">
+            <iframe src="http://127.0.0.1:9000/viewVisitor" frameborder="0" id="viewtable"></iframe>
+        </div>
+        <!-- Update visitor -->
+        <div class="container" id="update" style="display:none;">
+            <form id="updateForm" action="http://localhost:9000/updateVisitor" method="POST">
+                <label for="id">ID</label>
+                <input type="number" id="idc" name="idc" placeholder="Enter ID" required>
+                <br><br>
+                <input type="hidden" id="update_id" name="id"> <!-- Hidden field to store visitor ID -->
+                <label for="update_name">Name</label>
+                <input type="text" id="update_name" name="name" placeholder="Enter Name" required>
+                <br><br>
+                <label for="update_contact">Contact Number</label>
+                <input type="tel" id="update_contact" name="contact" pattern="\d{10}" required placeholder="1234567890">
+                <br><br>
+                <label for="update_aadhar">Aadhar Number</label>
+                <input type="text" id="update_aadhar" name="aadhar" minlength="14" maxlength="14"
+                    pattern="\d{4} \d{4} \d{4}" placeholder="XXXX XXXX XXXX" required>
+                <br><br>
+                <label for="update_intime">In-Time</label>
+                <input type="datetime-local" id="update_intime" name="intime" required>
+                <br><br>
+                <label for="update_outtime">Out-Time</label>
+                <input type="datetime-local" id="update_outtime" name="outtime" required>
+                <br><br><br><br>
+                <button type="submit">Update</button>
+            </form>
+        </div>
+        <!-- Delete visitor -->
+        <div class="container" id="delete" style="display:none;">
+            <form id="deleteForm" action="http://localhost:9000/deleteVisitor" method="POST">
+                <label for="idc">ID</label>
+                <input type="number" id="idc" name="idc">
+                <br><br>
+                <button type="submit">Delete</button>
+            </form>
+        </div>
+    </div>
+    <script>
+        // script.js
+
+
+        function toggleForm(index) {
+            const forms = document.querySelectorAll('.right > div');
+            forms.forEach((form, i) => {
+                form.style.display = i === index ? 'block' : 'none';
+            });
+        }
+
+        function alidateAddForm() {
+            const name = document.getElementById("name").value.trim();
+            const contact = document.getElementById("contact").value.trim();
+            const aadhar = document.getElementById("aadhar").value.trim();
+            const intime = document.getElementById("intime").value.trim();
+            const outtime = document.getElementById("outtime").value.trim();
+
+            if (name === "" || contact === "" || aadhar === "" || intime === "" || outtime === "") {
+                alert("All fields are required.");
+                return false;
+            }
+
+            if (!/^\d{10}$/.test(contact)) {
+                alert("Please enter a valid 10-digit contact number.");
+                return false;
+            }
+
+            if (!/^\d{4} \d{4} \d{4}$/.test(aadhar)) {
+                alert("Please enter a valid Aadhar number in the format XXXX XXXX XXXX.");
+                return false;
+            }
+
+            return true;
+        }
+
+
+    </script>
+</body>
+<style>
+    /* style.css */
+
+    body {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+        font-family: Arial, sans-serif;
+    }
+
+    header {
+        background-color: #d9d9d9;
+        color: #ff0;
+        font-size: 30px;
+        font-weight: 600;
+        -webkit-text-stroke: 1px #ff9d9d;
+        padding: 20px 0px;
+        text-align: center;
+        position: fixed;
+        /* left:30vw; */
+        z-index: 9999;
+        width: 100%;
+    }
+
+    .left {
+        height: 100vh;
+        width: 20vw;
+        background-color: #0f0;
+        color: #fff;
+        position: fixed;
+        z-index: 999;
+    }
+
+    .left .in {
+        display: flex;
+        flex-direction: column;
+        row-gap: 30px;
+        align-items: center;
+        padding-top: 30vh;
+        font-size: 20px;
+        font-weight: 700;
+        font-variant: small-caps;
+    }
+
+    .left .in .bx {
+        border: 2px solid #fff;
+        background-color: #f55;
+        padding: 4px 16px;
+        width: 50%;
+        text-align: center;
+        cursor: pointer;
+    }
+
+    .right {
+        position: fixed;
+        z-index: -1;
+        margin-left: 30vw;
+        justify-content: center;
+        align-items: center;
+    }
+
+
+    .right .container {
+        margin-top: 30vh;
+    }
+
+
+
+    .container {
+        margin-bottom: 20px;
+    }
+
+    .container label {
+        display: inline-block;
+        width: 150px;
+        text-align: right;
+        margin-right: 10px;
+    }
+
+    .container input[type="text"],
+    .container input[type="number"],
+    .container input[type="tel"],
+    .container input[type="datetime-local"] {
+        width: calc(100% - 170px);
+        box-sizing: border-box;
+        font-size: 16px;
+        border: 1px solid #ccc;
+        padding: 8px;
+    }
+
+    .container button[type="submit"] {
+        display: block;
+        margin: 20px auto;
+        width: 150px;
+        height: 40px;
+        font-size: 16px;
+    }
+
+    .container table {
+        border-collapse: collapse;
+        width: 100%;
+
+    }
+
+    .container table th,
+    .container table td {
+        border: 1px solid #dddddd;
+        text-align: left;
+        padding: 8px;
+        margin-top: 20px;
+    }
+
+    .container table th {
+        background-color: #f2f2f2;
+    }
+
+    iframe {
+        width: 70vw;
+        height: 70vh;
+        margin-left: -5vw;
+        margin-bottom: 5vh;
+        margin-top: -10vh;
+    }
+</style>
+
+</html>
