@@ -1,0 +1,19 @@
+{
+  "name": "simple-crud",
+  "version": "1.0.0",
+  "main": "ls.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon ls.js"
+  },
+  "keywords": [],
+  "author": "Giridharan S",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "body-parser": "^1.20.2",
+    "express": "^4.19.2",
+    "mongoose": "^8.5.0",
+    "nodemon": "^3.1.4"
+  }
+}

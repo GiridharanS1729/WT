@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Management</title>
+    <link rel="stylesheet" href="lc.css">
+</head>
+
+<body>
+    <h1>User Management System</h1>
+
+    <h2>Add User</h2>
+    <form action="http://localhost:3000/add" method="POST">
+        <label for="username">Username:</label>
+        <input type="text" id="username" name="user" required><br><br>
+        <label for="age">Age:</label>
+        <input type="number" id="age" name="age" required><br><br>
+        <button type="submit">Add User</button>
+    </form>
+
+    <hr>
+
+    <h2>Delete User</h2>
+    <form action="http://localhost:3000/del" method="POST">
+        <label for="deleteUsername">Username:</label>
+        <input type="text" id="deleteUsername" name="user" required><br><br>
+        <button type="submit">Delete User</button>
+    </form>
+
+    <hr>
+
+    <h2>View Users</h2>
+    <form action="http://localhost:3000/view" method="GET">
+        <button type="submit">View Users</button>
+    </form>
+
+    <div id="userData">
+    </div>
+
+    <h2>Update User</h3>
+    <form action="http://localhost:3000/upd" method="POST">
+        <label for="username">Username:</label>
+        <input type="text" id="username" name="user" required><br><br>
+        <label for="age">Age:</label>
+        <input type="number" id="age" name="age" required><br><br>
+        <button type="submit">update User</button>
+    </form>
+</body>
+
+</html>
